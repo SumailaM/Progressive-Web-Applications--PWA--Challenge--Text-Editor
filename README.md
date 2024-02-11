@@ -10,6 +10,7 @@ Edit and format text
 Save documents locally
 Offline support with service worker
 Responsive design for mobile and desktop
+
 Technologies Used
 HTML5
 CSS3
@@ -17,6 +18,7 @@ JavaScript (ES6+)
 Service Workers
 IndexedDB (for local storage)
 Webpack
+
 Getting Started
 To run the Text Editor application locally on your machine, follow these steps:
 
@@ -26,6 +28,7 @@ Install dependencies using npm install.
 Build the project using npm run build.
 Start the development server using npm start.
 Open your web browser and navigate to http://localhost:3000 to access the application.
+
 Usage
 To create a new document, click on the "New Document" button.
 To open an existing document, click on the "Open Document" button and select the desired file.
