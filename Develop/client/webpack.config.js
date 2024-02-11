@@ -3,67 +3,58 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
-
-module.exports = () => {
-  return {
-    mode: 'development',
-    entry: {
-      main: './src/js/index.js',
-      install: './src/js/install.js'
-    },
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    plugins: [new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html',
-      chunks: ['main'],
-    }),
+module.exports = {
+  mode: 'development',
+  entry: {
+    main: './src/js/index.js',
+    install: './src/js/install.js'
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  plugins: [
     new HtmlWebpackPlugin({
-      template: './src/install.html',
-      filename: 'install.html',
-      chunks: ['install'],
+      template: './index.html',
+      title: 'Contact Cards'
+    }),
+    new InjectManifest({
+      swSrc: './src/sw.js', // Path to your service worker source file
     }),
     new WebpackPwaManifest({
-      filename: 'manifest.json',
-      name: 'Your App Name',
-      short_name: 'App',
-      description: 'Description of your app',
-      background_color: '#ffffff',
-      theme_color: '#ffffff',
+      name: 'jate',
+      short_name: 'jate',
+      description: 'text editor',
+      background_color: '#000000',
+      theme_color: '#7eb4e2',
+      start_url: './',
+      publicPath: './',
       icons: [
         {
-          src: path.resolve('src/img/icon.png'),
+          src: path.resolve('assets/images/logo.png'),
           sizes: [96, 128, 192, 256, 384, 512],
           destination: path.join('assets', 'icons'),
         },
       ],
     }),
-    new InjectManifest({
-      swSrc: './src/service-worker.js',
-    }),
   ],
-
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader' ],
       },
       {
-        test: /\.js$/,
+        test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
           },
         },
       },
     ],
   },
-};
 };
