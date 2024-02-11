@@ -35,5 +35,6 @@ To open an existing document, click on the "Open Document" button and select the
 Edit the text content as needed using the provided text editor interface.
 Click on the "Save" button to save the document locally.
 The application automatically saves changes periodically and provides an option to undo/redo edits.
+
 License
 This project is licensed under the MIT License.
